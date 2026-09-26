@@ -1,0 +1,18 @@
+# Use a base image with Flutter SDK
+FROM  instrumentisto/flutter:3.24
+
+# Set environment variables for Android SDK paths
+ENV ANDROID_HOME=/opt/android-sdk
+ENV PATH=${ANDROID_HOME}/cmdline-tools/latest/bin:${ANDROID_HOME}/platform-tools:$PATH
+
+# Copy the Flutter project into the Docker container
+COPY . /workspace/
+
+# Set the working directory
+WORKDIR /workspace
+
+# Ensure dependencies are installed
+RUN flutter pub get
+
+# Build the App Bundle
+CMD ["flutter","build","appbundle"]

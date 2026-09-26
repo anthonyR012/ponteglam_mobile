@@ -1,0 +1,113 @@
+name: ponte_glam
+description: "A new Flutter project."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.4+5
+
+environment:
+  sdk: ">=3.2.6 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: ^0.20.2
+  timezone: ^0.9.4
+  flutter_svg: ^2.0.10+1
+  cupertino_icons: ^1.0.6
+  google_sign_in: ^6.2.1
+  firebase_auth: ^6.2.0
+  firebase_core: ^4.5.0
+  firebase_messaging: ^16.1.2
+  get_it: ^8.0.3
+  dartz: ^0.10.1
+  dio: ^5.4.3+1
+  flutter_bloc: ^8.1.5
+  shared_preferences: ^2.2.3
+  flutter_secure_storage: ^10.0.0-beta.2
+
+  image_picker: ^1.0.8
+  equatable: ^2.0.5
+  fancy_drawer: ^2.0.0
+  skeletonizer: ^2.1.3
+  geolocator: ^13.0.2
+  connectivity_plus: ^6.1.1
+  latlong2: ^0.9.1
+  flutter_map: ^6.1.0
+  geocoding: ^3.0.0
+  permission_handler: ^11.3.1
+  path_provider: ^2.1.3
+  animations: ^2.0.3
+  go_router: ^14.2.0
+  flutter_localizations:
+    sdk: flutter
+  url_launcher: ^6.2.6
+  bloc_concurrency: ^0.2.5
+  device_info_plus: ^11.2.0
+
+  flutter_local_notifications: ^18.0.0
+  audioplayers: ^6.6.0
+
+dependency_overrides:
+  web: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^2.4.8
+  flutter_launcher_icons: ^0.14.2
+  flutter_lints: ^5.0.0
+  mockito: ^5.4.4
+  http_mock_adapter: ^0.6.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/icons/
+    - assets/sounds/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon_ponte_gradient.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/images/icon_ponte_gradient.png"
+  windows:
+    generate: true
+    image_path: "assets/images/icon_ponte_gradient.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/images/icon_ponte_gradient.png"
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Hind
+      fonts:
+        - asset: assets/fonts/HindMadurai.ttf
+    - family: Monstserrat
+      fonts:
+        - asset: assets/fonts/MontserratFontwght.ttf
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/LoraItalicwght.ttf
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

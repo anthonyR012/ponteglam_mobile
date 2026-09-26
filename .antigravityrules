@@ -1,0 +1,31 @@
+## 4. Arquitectura Flutter (Clean Architecture)
+- **Estructura de Capas**: Respeta estrictamente la división dentro de `lib/src/`:
+  - **Data**: Solo implementaciones de repositorios y datasources.
+  - **Domain**: Solo entidades, interfaces de repositorios y Use Cases. PROHIBIDO importar paquetes de Flutter o de la capa de Data aquí.
+  - **UI**: Solo widgets y la lógica de presentación (Cubit/BLoC).
+- **Localización**: No uses strings hardcoded en los widgets. Usa siempre el sistema de localización ubicado en `lib/l10n/`.
+- **Inyección de Dependencias**: Si creas un nuevo servicio o repositorio, asegúrate de registrarlo en `lib/di/` siguiendo el patrón existente.
+
+## 5. Gestión de Estado (BLoC / Cubit)
+- Usa **Cubit** para estados simples y **BLoC** para flujos de eventos complejos.
+- Los archivos de estado deben seguir la convención: `nombre_cubit.dart` y `nombre_state.dart`.
+- Prohibido usar `setState()` en widgets que requieran lógica de negocio; delega siempre al Cubit/BLoC.
+
+## 6. Organización de Archivos y Tests
+- Los nuevos módulos deben replicar la estructura de carpetas de `lib/src/client/home/` (data/domain/ui).
+- Al igual que en el backend, cualquier archivo de prueba de Flutter DEBE crearse en la ruta: `antigravity/test/flutter/`.
+- No generes archivos `.freezed.dart` o `.g.dart` manualmente; indica que se debe correr el `build_runner`.
+
+## 7. Estilo de Código
+- Usa constructores `const` siempre que sea posible para optimizar el rendimiento.
+- Sigue las guías de estilo oficiales de Dart (Lints).
+
+## 8. Restricciones de Terminal y Git
+- Tienes PROHIBIDO ejecutar comandos de Git (`git add`, `git commit`, `git push`).
+- No intentes subir código a repositorios remotos.
+- Si consideras que es necesario realizar un commit, detente y solicítame permiso por el chat, describiendo qué archivos vas a incluir.
+
+## 9. Gestión de Scripts de Base de Datos
+- **Ubicación obligatoria**: Cualquier script temporal, de reparación o de migración de datos manual DEBE crearse en `antigravity/test/db_fixes/`. Está PROHIBIDO crearlos en la raíz o dentro de las apps de Django.
+- **Auto-eliminación**: Una vez que el script haya sido ejecutado exitosamente y hayamos verificado los cambios en la base de datos, DEBES borrar el archivo automáticamente. 
+- **Propósito Único**: Si el problema puede resolverse mediante una migración estándar de Django (`makemigrations`), prioriza ese método antes que crear scripts externos.
