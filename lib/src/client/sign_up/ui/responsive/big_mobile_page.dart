@@ -38,7 +38,7 @@ class BigMobilePersonalInformationPage extends StatefulWidget {
   final FocusNode focusNodeEmail;
   final FocusNode focusNodePassword;
   final void Function() signUp;
-  final void Function() signUpWithGoogle;
+  final void Function(bool acceptedTerms) signUpWithGoogle;
   final TextEditingController controllerName;
   final TextEditingController controllerEmail;
   final TextEditingController controllerPassword;
@@ -76,7 +76,7 @@ class _BigMobilePersonalInformationPageState
       _showError(getIt<AppLocalizations>().failurePrivacyRequired);
       return;
     }
-    widget.signUpWithGoogle();
+    widget.signUpWithGoogle(_termsAccepted && _privacyAccepted);
   }
 
   void _showError(String message) {

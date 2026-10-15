@@ -256,7 +256,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sentenceGettingRelax =>
-      'We make it easy to access a wide range of spa and pet care services.';
+      'We make it easy to access a wide range of spa and beauty services.';
 
   @override
   String get sentenceGettingKeyCaracteristics =>
@@ -456,7 +456,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get titleAppointment => 'Appointment';
 
   @override
-  String get titleCalendar => 'Calendar';
+  String get titleCalendar => 'My Bookings';
 
   @override
   String get titleTermsAndConditions => 'Terms and Conditions';

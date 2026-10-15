@@ -581,7 +581,7 @@ abstract class AppLocalizations {
   /// No description provided for @sentenceGettingRelax.
   ///
   /// In en, this message translates to:
-  /// **'We make it easy to access a wide range of spa and pet care services.'**
+  /// **'We make it easy to access a wide range of spa and beauty services.'**
   String get sentenceGettingRelax;
 
   /// No description provided for @sentenceGettingKeyCaracteristics.
@@ -941,7 +941,7 @@ abstract class AppLocalizations {
   /// No description provided for @titleCalendar.
   ///
   /// In en, this message translates to:
-  /// **'Calendar'**
+  /// **'My Bookings'**
   String get titleCalendar;
 
   /// No description provided for @titleTermsAndConditions.

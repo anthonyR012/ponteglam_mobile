@@ -40,7 +40,7 @@ class SmallMobilePersonalInformationPage extends StatefulWidget {
   final TextEditingController controllerPassword;
   final GlobalKey<FormState> formKey;
   final void Function() signUp;
-  final void Function() signUpWithGoogle;
+  final void Function(bool acceptedTerms) signUpWithGoogle;
   final void Function(String value, FocusNode unFocusNode, FocusNode focusNode)
       changeFocusNode;
   final void Function(BuildContext, SignUpState) listener;
@@ -76,7 +76,7 @@ class _SmallMobilePersonalInformationPageState
       _showError(getIt<AppLocalizations>().failurePrivacyRequired);
       return;
     }
-    widget.signUpWithGoogle();
+    widget.signUpWithGoogle(_termsAccepted && _privacyAccepted);
   }
 
   void _showError(String message) {

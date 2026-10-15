@@ -1,5 +1,5 @@
 class EndPoints {
-  final String baseUrl = "http://192.168.1.15:8000";
+  final String baseUrl = "https://89d3-2800-e2-777f-ee0b-39c5-4be8-5d93-727e.ngrok-free.app";
   EndPoints();
 
   // Auth

@@ -88,11 +88,12 @@ class _SmallMobileHomeSupplierPageState
               icon: iconEdit,
               goto: EditCompanyPage.routeName,
             ),
-            ButtonNavModel(
-              description: "Crear sede",
-              icon: iconBuilding,
-              goto: CreateHeadquarterPage.routeName,
-            ),
+            // "Crear sede" deshabilitado temporalmente para esta versión.
+            // ButtonNavModel(
+            //   description: "Crear sede",
+            //   icon: iconBuilding,
+            //   goto: CreateHeadquarterPage.routeName,
+            // ),
             ButtonNavModel(
               description: "Ayuda / PQRS",
               iconData: Icons.help_outline_rounded,

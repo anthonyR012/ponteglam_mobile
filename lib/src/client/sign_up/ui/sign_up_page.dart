@@ -135,8 +135,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   // ─── Sign up with Google ─────────────────────────────────────────────────
 
-  void _signUpWithGoogle() {
-    context.read<SignInCubit>().doSignIn(repository: Repository.firebase);
+  void _signUpWithGoogle(bool acceptedTerms) {
+    context.read<SignInCubit>().doSignIn(
+        repository: Repository.firebase, acceptedTerms: acceptedTerms);
   }
 
   void _listenerGoogle(BuildContext context, SignInState state) {

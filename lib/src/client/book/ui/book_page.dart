@@ -87,43 +87,47 @@ class _BookPageState extends State<BookPage> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (ctx) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Selecciona método de pago',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: fontFamilyMontserrat,
+      useSafeArea: true,
+      builder: (ctx) => SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Selecciona método de pago',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: fontFamilyMontserrat,
+                ),
               ),
-            ),
-            const SizedBox(height: 24),
-            _PaymentOption(
-              icon: Icons.payments_outlined,
-              title: 'Efectivo',
-              subtitle: 'Paga en el local al momento del servicio',
-              color: Colors.green,
-              onTap: () {
-                Navigator.pop(ctx);
-                setState(() => _isBookingInProgress = true);
-                _bookingCubit.createBooking(
-                  serviceId: serviceId,
-                  workerId: slot.workerId,
-                  startTime: slot.startTime,
-                  endTime: slot.endTime,
-                  paymentMethod: 'cash',
-                  isHomeService: isHomeService,
-                  homeAddressId: selectedAddress?.id,
-                  selectedAddons: selectedAddons,
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 24),
+              _PaymentOption(
+                icon: Icons.payments_outlined,
+                title: 'Efectivo',
+                subtitle: 'Paga en el local al momento del servicio',
+                color: Colors.green,
+                onTap: () {
+                  Navigator.pop(ctx);
+                  setState(() => _isBookingInProgress = true);
+                  _bookingCubit.createBooking(
+                    serviceId: serviceId,
+                    workerId: slot.workerId,
+                    startTime: slot.startTime,
+                    endTime: slot.endTime,
+                    paymentMethod: 'cash',
+                    isHomeService: isHomeService,
+                    homeAddressId: selectedAddress?.id,
+                    selectedAddons: selectedAddons,
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );
@@ -168,297 +172,305 @@ class _BookPageState extends State<BookPage> {
               subtitleAppBar: widget.headquarterModel.companyInfo?.name,
             ),
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.service.images.length == 1)
-                    Container(
-                      height: 180,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            ImageLoadWidget(
-                              image: widget.service.images.first,
-                              typeSourceImage: TypeSourceImage.network,
-                              fit: BoxFit.cover,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.black.withValues(alpha: 0.7),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 16,
-                              left: 16,
-                              right: 16,
-                              child: Text(
-                                widget.service.name,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: fontFamilyMontserrat,
-                                ),
-                              ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.service.images.length == 1)
+                      Container(
+                        height: 180,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              ImageLoadWidget(
+                                image: widget.service.images.first,
+                                typeSourceImage: TypeSourceImage.network,
+                                fit: BoxFit.cover,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.black.withValues(alpha: 0.7),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 16,
+                                left: 16,
+                                right: 16,
+                                child: Text(
+                                  widget.service.name,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: fontFamilyMontserrat,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    else ...[
+                      Text(
+                        widget.service.name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: fontFamilyMontserrat,
+                          color: primaryColorTheme,
+                        ),
                       ),
-                    )
-                  else ...[
-                    Text(
-                      widget.service.name,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: fontFamilyMontserrat,
-                        color: primaryColorTheme,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
+                      const SizedBox(height: 12),
+                      if (widget.service.images.isNotEmpty)
+                        SizedBox(
+                          height: 110,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.service.images.length,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(width: 10),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.08),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: ImageLoadWidget(
+                                    image: widget.service.images[index],
+                                    typeSourceImage: TypeSourceImage.network,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                    ],
                     if (widget.service.images.isNotEmpty)
-                      SizedBox(
-                        height: 110,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: widget.service.images.length,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 10),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.08),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 3),
+                      const SizedBox(height: 16),
+                    const SizedBox(height: 4),
+                    const SizedBox(height: 20),
+                    const _TextTitleLabel(
+                        description: 'Trabajadores disponibles'),
+                    const SizedBox(height: 10),
+                    _AvailableWorkers(
+                      serviceId: activeService.id,
+                      headQuarterId: widget.headquarterModel.id,
+                      selectedWorkerId: _selectedWorkerId,
+                      onWorkerSelected: (workerId) {
+                        setState(() => _selectedWorkerId = workerId);
+                        if (workerId != null) {
+                          _bookingCubit.loadDates(
+                            serviceId: activeService.id,
+                            workerId: workerId,
+                            headQuarterId: widget.headquarterModel.id,
+                          );
+                        } else {
+                          _bookingCubit.reset();
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    if (_selectedWorkerId == null)
+                      const _LockedStepHint(
+                        stepNumber: 2,
+                        label: 'Selecciona una fecha',
+                        message:
+                            'Primero selecciona un trabajador para ver las fechas disponibles',
+                      )
+                    else ...[
+                      const _TextTitleLabel(
+                          description: 'Selecciona una fecha'),
+                      const SizedBox(height: 10),
+                      const _DateSelector(),
+                    ],
+                    const SizedBox(height: 20),
+                    BlocBuilder<BookingCubit, BookingState>(
+                      builder: (context, state) {
+                        final hasDate = _getSelectedDate(state) != null;
+                        if (!hasDate) {
+                          return _LockedStepHint(
+                            stepNumber: 3,
+                            label: 'Horarios disponibles',
+                            message: _selectedWorkerId == null
+                                ? 'Primero selecciona un trabajador y una fecha'
+                                : 'Selecciona una fecha para ver los horarios disponibles',
+                          );
+                        }
+                        return const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _TextTitleLabel(
+                                description: 'Horarios disponibles'),
+                            SizedBox(height: 10),
+                            _SlotSelector(),
+                          ],
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    BlocBuilder<BookingCubit, BookingState>(
+                      builder: (context, state) {
+                        final slot = _getSelectedSlot(state);
+                        if (slot == null) return const SizedBox.shrink();
+                        final isHomeService = state is BookingSlotSelected
+                            ? state.isHomeService
+                            : false;
+                        final selectedHomeAddress = state is BookingSlotSelected
+                            ? state.selectedHomeAddress
+                            : null;
+                        return Column(
+                          children: [
+                            _HomeServiceSwitch(
+                              slot: slot,
+                              isHomeService: isHomeService,
+                            ),
+                            if (isHomeService && slot.onlyHomeService) ...[
+                              const SizedBox(height: 12),
+                              _HomeAddressSelector(
+                                selectedAddress: selectedHomeAddress,
+                              ),
+                            ],
+                            if (state is BookingSlotSelected) ...[
+                              const SizedBox(height: 12),
+                              AddonSelectorWidget(state: state),
+                            ],
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: BookingSummaryWidget(
+                                slot: slot,
+                                serviceName: activeService.name,
+                                price: activeService.price,
+                                isHomeService: isHomeService,
+                                homeServicePrice: slot.homeServicePrice,
+                                headquarterName: widget.headquarterModel.name,
+                                address: widget.headquarterModel.address ?? "",
+                                selectedHomeAddress: selectedHomeAddress,
+                                selectedAddons: state is BookingSlotSelected
+                                    ? state.selectedAddons
+                                    : const [],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    BlocBuilder<BookingCubit, BookingState>(
+                      builder: (context, state) {
+                        final slot = _getSelectedSlot(state);
+                        final isReady = slot != null && !_isBookingInProgress;
+                        final isHomeService = state is BookingSlotSelected
+                            ? state.isHomeService
+                            : false;
+                        final homePrice =
+                            (isHomeService && (slot?.homeServicePrice ?? 0) > 0)
+                                ? slot!.homeServicePrice!
+                                : 0.0;
+
+                        final addonsPrice = state is BookingSlotSelected
+                            ? state.selectedAddons
+                                .fold<double>(0, (sum, a) => sum + a.price)
+                            : 0.0;
+
+                        final formattedPrice = NumberFormat.currency(
+                                locale: 'es_CO', symbol: '\$', decimalDigits: 0)
+                            .format(
+                                activeService.price + homePrice + addonsPrice);
+
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('TOTAL'),
+                                  Text(
+                                    formattedPrice,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: ImageLoadWidget(
-                                  image: widget.service.images[index],
-                                  typeSourceImage: TypeSourceImage.network,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                  ],
-                  if (widget.service.images.isNotEmpty)
-                    const SizedBox(height: 16),
-                  const SizedBox(height: 4),
-                  const SizedBox(height: 20),
-                  const _TextTitleLabel(
-                      description: 'Trabajadores disponibles'),
-                  const SizedBox(height: 10),
-                  _AvailableWorkers(
-                    serviceId: activeService.id,
-                    headQuarterId: widget.headquarterModel.id,
-                    selectedWorkerId: _selectedWorkerId,
-                    onWorkerSelected: (workerId) {
-                      setState(() => _selectedWorkerId = workerId);
-                      if (workerId != null) {
-                        _bookingCubit.loadDates(
-                          serviceId: activeService.id,
-                          workerId: workerId,
-                          headQuarterId: widget.headquarterModel.id,
-                        );
-                      } else {
-                        _bookingCubit.reset();
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  if (_selectedWorkerId == null)
-                    const _LockedStepHint(
-                      stepNumber: 2,
-                      label: 'Selecciona una fecha',
-                      message:
-                          'Primero selecciona un trabajador para ver las fechas disponibles',
-                    )
-                  else ...[
-                    const _TextTitleLabel(description: 'Selecciona una fecha'),
-                    const SizedBox(height: 10),
-                    const _DateSelector(),
-                  ],
-                  const SizedBox(height: 20),
-                  BlocBuilder<BookingCubit, BookingState>(
-                    builder: (context, state) {
-                      final hasDate = _getSelectedDate(state) != null;
-                      if (!hasDate) {
-                        return _LockedStepHint(
-                          stepNumber: 3,
-                          label: 'Horarios disponibles',
-                          message: _selectedWorkerId == null
-                              ? 'Primero selecciona un trabajador y una fecha'
-                              : 'Selecciona una fecha para ver los horarios disponibles',
-                        );
-                      }
-                      return const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _TextTitleLabel(description: 'Horarios disponibles'),
-                          SizedBox(height: 10),
-                          _SlotSelector(),
-                        ],
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  BlocBuilder<BookingCubit, BookingState>(
-                    builder: (context, state) {
-                      final slot = _getSelectedSlot(state);
-                      if (slot == null) return const SizedBox.shrink();
-                      final isHomeService = state is BookingSlotSelected
-                          ? state.isHomeService
-                          : false;
-                      final selectedHomeAddress = state is BookingSlotSelected
-                          ? state.selectedHomeAddress
-                          : null;
-                      return Column(
-                        children: [
-                          _HomeServiceSwitch(
-                            slot: slot,
-                            isHomeService: isHomeService,
-                          ),
-                          if (isHomeService && slot.onlyHomeService) ...[
-                            const SizedBox(height: 12),
-                            _HomeAddressSelector(
-                              selectedAddress: selectedHomeAddress,
-                            ),
-                          ],
-                          if (state is BookingSlotSelected) ...[
-                            const SizedBox(height: 12),
-                            AddonSelectorWidget(state: state),
-                          ],
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 20.0),
-                            child: BookingSummaryWidget(
-                              slot: slot,
-                              serviceName: activeService.name,
-                              price: activeService.price,
-                              isHomeService: isHomeService,
-                              homeServicePrice: slot.homeServicePrice,
-                              headquarterName: widget.headquarterModel.name,
-                              address: widget.headquarterModel.address ?? "",
-                              selectedHomeAddress: selectedHomeAddress,
-                              selectedAddons: state is BookingSlotSelected
-                                  ? state.selectedAddons
-                                  : const [],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                  BlocBuilder<BookingCubit, BookingState>(
-                    builder: (context, state) {
-                      final slot = _getSelectedSlot(state);
-                      final isReady = slot != null && !_isBookingInProgress;
-                      final isHomeService = state is BookingSlotSelected
-                          ? state.isHomeService
-                          : false;
-                      final homePrice =
-                          (isHomeService && (slot?.homeServicePrice ?? 0) > 0)
-                              ? slot!.homeServicePrice!
-                              : 0.0;
-
-                      final addonsPrice = state is BookingSlotSelected
-                          ? state.selectedAddons
-                              .fold<double>(0, (sum, a) => sum + a.price)
-                          : 0.0;
-
-                      final formattedPrice = NumberFormat.currency(
-                              locale: 'es_CO', symbol: '\$', decimalDigits: 0)
-                          .format(activeService.price + homePrice + addonsPrice);
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('TOTAL'),
-                                Text(
-                                  formattedPrice,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            _isBookingInProgress
-                                ? const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 16),
-                                    child: CircularProgressIndicator(
-                                        color: primaryColorTheme),
-                                  )
-                                : ButtonMain(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
-                                    textButton: 'Reservar',
-                                    backgroundColor: isReady
-                                        ? primaryColorTheme
-                                        : Colors.grey,
-                                    iconCustom: SvgPicture.asset(
-                                      '$pathManagementIcons$iconForwardArrow',
-                                      colorFilter: const ColorFilter.mode(
-                                          Colors.white, BlendMode.srcIn),
+                              _isBookingInProgress
+                                  ? const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 16),
+                                      child: CircularProgressIndicator(
+                                          color: primaryColorTheme),
+                                    )
+                                  : ButtonMain(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
+                                      textButton: 'Reservar',
+                                      backgroundColor: isReady
+                                          ? primaryColorTheme
+                                          : Colors.grey,
+                                      iconCustom: SvgPicture.asset(
+                                        '$pathManagementIcons$iconForwardArrow',
+                                        colorFilter: const ColorFilter.mode(
+                                            Colors.white, BlendMode.srcIn),
+                                      ),
+                                      onPressed: () {
+                                        if (!isReady) {
+                                          PonteSnackBar.show(
+                                            context,
+                                            message:
+                                                'Por favor selecciona un horario primero',
+                                            type: TypeAlert.error,
+                                          );
+                                          return;
+                                        }
+                                        _showPaymentMethodSheet(
+                                            context, slot, activeService.id);
+                                      },
                                     ),
-                                    onPressed: () {
-                                      if (!isReady) {
-                                        PonteSnackBar.show(
-                                          context,
-                                          message: 'Por favor selecciona un horario primero',
-                                          type: TypeAlert.error,
-                                        );
-                                        return;
-                                      }
-                                      _showPaymentMethodSheet(
-                                          context, slot, activeService.id);
-                                    },
-                                  ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

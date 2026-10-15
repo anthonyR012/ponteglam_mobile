@@ -13,7 +13,6 @@ import 'package:ponte_glam/src/client/notification/ui/notification_page.dart';
 import 'package:ponte_glam/src/client/profile/ui/profile_page.dart';
 import 'package:ponte_glam/src/shared/wallet/ui/page/wallet_page.dart';
 import 'package:ponte_glam/src/client/company/ui/company_creation_page.dart';
-import 'package:ponte_glam/shared/model/service_model.dart';
 
 class SmallMobileHomePage extends StatefulWidget {
   const SmallMobileHomePage(
@@ -27,58 +26,59 @@ class SmallMobileHomePage extends StatefulWidget {
 }
 
 class _SmallMobileHomePageState extends State<SmallMobileHomePage> {
-  bool _showRedDot = false;
-  bool _hasCompany = false;
+  // "Ofrecer servicio" deshabilitado temporalmente para esta versión.
+  // bool _showRedDot = false;
+  // bool _hasCompany = false;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomeBloc>().add(const DoGetUnreadCountEvent());
-      _checkUserCompany();
+      // _checkUserCompany();
     });
-    _checkOfrecerServicioSeen();
+    // _checkOfrecerServicioSeen();
   }
 
-  Future<void> _checkUserCompany() async {
-    try {
-      final storage = getIt<IStorage>();
-      final geoDevice = getIt<GeoDevice>();
-      final params = ParamsDoGetServices(
-        storage: storage,
-        filter: const FilterServiceModel(mine: true),
-        geoDevice: geoDevice,
-      );
+  // Future<void> _checkUserCompany() async {
+  //   try {
+  //     final storage = getIt<IStorage>();
+  //     final geoDevice = getIt<GeoDevice>();
+  //     final params = ParamsDoGetServices(
+  //       storage: storage,
+  //       filter: const FilterServiceModel(mine: true),
+  //       geoDevice: geoDevice,
+  //     );
 
-      final result = await getIt<DoGetServices>().call(params: params);
-      result.fold(
-        (failure) {},
-        (paginator) {
-          if (mounted) {
-            setState(() {
-              _hasCompany = paginator.headquarters.isNotEmpty;
-            });
-          }
-        },
-      );
-    } catch (_) {}
-  }
+  //     final result = await getIt<DoGetServices>().call(params: params);
+  //     result.fold(
+  //       (failure) {},
+  //       (paginator) {
+  //         if (mounted) {
+  //           setState(() {
+  //             _hasCompany = paginator.headquarters.isNotEmpty;
+  //           });
+  //         }
+  //       },
+  //     );
+  //   } catch (_) {}
+  // }
 
-  void _checkOfrecerServicioSeen() {
-    final prefs = getIt<SharedPreferences>();
-    final hasSeen = prefs.getBool('has_seen_ofrecer_servicio') ?? false;
-    setState(() {
-      _showRedDot = !hasSeen;
-    });
-  }
+  // void _checkOfrecerServicioSeen() {
+  //   final prefs = getIt<SharedPreferences>();
+  //   final hasSeen = prefs.getBool('has_seen_ofrecer_servicio') ?? false;
+  //   setState(() {
+  //     _showRedDot = !hasSeen;
+  //   });
+  // }
 
-  void _markOfrecerServicioAsSeen() {
-    final prefs = getIt<SharedPreferences>();
-    prefs.setBool('has_seen_ofrecer_servicio', true);
-    setState(() {
-      _showRedDot = false;
-    });
-  }
+  // void _markOfrecerServicioAsSeen() {
+  //   final prefs = getIt<SharedPreferences>();
+  //   prefs.setBool('has_seen_ofrecer_servicio', true);
+  //   setState(() {
+  //     _showRedDot = false;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,18 +99,19 @@ class _SmallMobileHomePageState extends State<SmallMobileHomePage> {
                 description: appLocalization.titleProfile,
                 icon: iconProfile,
                 goto: ProfilePage.routeName),
-            if (!_hasCompany)
-              ButtonNavModel(
-                description: "Ofrecer servicio",
-                iconData: Icons.storefront_rounded,
-                showRedDot: _showRedDot,
-                goto: CompanyCreationPage.routeName,
-                onTapButton: () {
-                  _markOfrecerServicioAsSeen();
-                  controllerMenu.close();
-                  notifierNav.setRoute(CompanyCreationPage.routeName);
-                },
-              ),
+            // "Ofrecer servicio" deshabilitado temporalmente para esta versión.
+            // if (!_hasCompany)
+            //   ButtonNavModel(
+            //     description: "Ofrecer servicio",
+            //     iconData: Icons.storefront_rounded,
+            //     showRedDot: _showRedDot,
+            //     goto: CompanyCreationPage.routeName,
+            //     onTapButton: () {
+            //       _markOfrecerServicioAsSeen();
+            //       controllerMenu.close();
+            //       notifierNav.setRoute(CompanyCreationPage.routeName);
+            //     },
+            //   ),
             // ButtonNavModel(
             //     description: appLocalization.titleWallet,
             //     iconData: Icons.account_balance_wallet_rounded,
