@@ -97,7 +97,7 @@ class _AppointmentDetailPageState extends State<AppointmentDetailPage> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-            body: _buildBody(context, state),
+            body: SafeArea(child: _buildBody(context, state)),
           );
         },
       ),
