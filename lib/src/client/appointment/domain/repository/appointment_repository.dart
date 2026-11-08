@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ponte_glam/core/errors/failure.dart';
+import 'package:ponte_glam/shared/model/available_date_model.dart';
 import 'package:ponte_glam/src/client/appointment/data/model/appointment_model.dart';
 
 abstract class AppointmentRepository {
@@ -25,12 +26,15 @@ abstract class AppointmentRepository {
     String? reason,
   });
 
+  Future<Either<Failure, List<AvailableDateModel>>> listRescheduleSlots({
+    required String authToken,
+    required int appointmentId,
+  });
+
   Future<Either<Failure, void>> rescheduleAppointment({
     required String authToken,
     required int appointmentId,
     required String newStartTime,
-    required String newEndTime,
-    int? workerId,
   });
 
   Future<Either<Failure, AppointmentModel>> confirmCashAppointment({

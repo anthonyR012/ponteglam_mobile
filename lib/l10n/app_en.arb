@@ -181,7 +181,33 @@
   "titleCompleted": "Completed",
   "titleCancelled": "Cancelled",
   "titleNoAppointmentsInCategory": "No appointments in this category",
-  "sentenceRescheduleEndAfterStart": "End time must be after start time",
+  "rescheduleWithWorker": "With {worker}",
+  "@rescheduleWithWorker": {
+    "placeholders": {
+      "worker": {}
+    }
+  },
+  "rescheduleCurrentAppointment": "Current appointment: {date}",
+  "@rescheduleCurrentAppointment": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "rescheduleChooseDay": "Choose a day",
+  "rescheduleChooseTime": "Available times",
+  "rescheduleNoSlotsDay": "No free times on this day.",
+  "rescheduleNoAvailability": "Your professional has no available times in the coming days.",
+  "rescheduleNewAppointment": "New appointment",
+  "rescheduleDurationHint": "The end time is calculated automatically from the service duration ({minutes} min).",
+  "@rescheduleDurationHint": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "rescheduleOnceWarning": "Important: you can only reschedule this appointment once.",
+  "rescheduleSuccess": "Your appointment was rescheduled",
   "@titleWhoIam":{
     "placeholders": {
       "user": {}

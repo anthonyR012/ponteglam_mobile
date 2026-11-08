@@ -417,11 +417,8 @@ class _SmallSupplierServicePageState extends State<SmallSupplierServicePage>
                                   .confirm(id),
                               onCancel: (appt) =>
                                   _showCancelDialog(context, appt),
-                              onReschedule: (appt) => showRescheduleSheet(
-                                context: context,
-                                appointment: appt,
-                                cubit: context.read<AppointmentCubit>(),
-                              ),
+                              onReschedule: (appt) =>
+                                  _openReschedule(context, appt),
                             );
                           },
                         );
@@ -433,6 +430,23 @@ class _SmallSupplierServicePageState extends State<SmallSupplierServicePage>
           },
         ),
       ),
+    );
+  }
+
+  Future<void> _openReschedule(
+      BuildContext context, AppointmentModel appointment) async {
+    final bool rescheduled =
+        await showRescheduleSheet(context: context, appointment: appointment);
+    if (!rescheduled || !context.mounted) return;
+    PonteSnackBar.show(
+      context,
+      message: AppLocalizations.of(context).rescheduleSuccess,
+      type: TypeAlert.success,
+    );
+    final appointmentsCubit = context.read<SupplierServiceAppointmentsCubit>();
+    appointmentsCubit.loadAppointments(
+      serviceId: widget.service.id,
+      status: appointmentsCubit.state.activeStatus,
     );
   }
 

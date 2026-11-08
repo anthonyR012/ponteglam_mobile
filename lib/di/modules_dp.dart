@@ -12,10 +12,12 @@ import 'package:ponte_glam/src/client/appointment/domain/use_case/do_cancel_appo
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_confirm_cash_appointment.dart';
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_get_appointment_detail.dart';
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_list_appointments.dart';
+import 'package:ponte_glam/src/client/appointment/domain/use_case/do_list_reschedule_slots.dart';
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_reschedule_appointment.dart';
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_rate_service.dart';
 import 'package:ponte_glam/src/client/appointment/domain/use_case/do_list_supplier_appointments.dart';
 import 'package:ponte_glam/src/client/appointment/ui/cubit/appointment_cubit.dart';
+import 'package:ponte_glam/src/client/appointment/ui/cubit/reschedule_cubit.dart';
 import 'package:ponte_glam/src/supplier/service/ui/cubit/confirm_cash_payment_cubit.dart';
 import 'package:ponte_glam/src/supplier/service/ui/cubit/supplier_service_appointments_cubit.dart';
 import 'package:ponte_glam/src/client/book/data/datasource/booking_datasource.dart';
@@ -317,6 +319,8 @@ void injectAppointmentDatasource() {
       () => DoCancelAppointment(repository: getIt()));
   _registerOrUnregister<DoRescheduleAppointment>(
       () => DoRescheduleAppointment(repository: getIt()));
+  _registerOrUnregister<DoListRescheduleSlots>(
+      () => DoListRescheduleSlots(repository: getIt()));
   _registerOrUnregister<DoConfirmCashAppointment>(
       () => DoConfirmCashAppointment(repository: getIt()));
   _registerOrUnregister<DoRateService>(
@@ -326,8 +330,13 @@ void injectAppointmentDatasource() {
             doListAppointments: getIt(),
             doGetAppointmentDetail: getIt(),
             doCancelAppointment: getIt(),
-            doRescheduleAppointment: getIt(),
             doRateService: getIt(),
+          ),
+      isFactory: true);
+  _registerOrUnregister<RescheduleCubit>(
+      () => RescheduleCubit(
+            doListRescheduleSlots: getIt(),
+            doRescheduleAppointment: getIt(),
           ),
       isFactory: true);
   _registerOrUnregister<DoListSupplierAppointments>(

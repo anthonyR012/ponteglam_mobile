@@ -1184,11 +1184,65 @@ abstract class AppLocalizations {
   /// **'No appointments in this category'**
   String get titleNoAppointmentsInCategory;
 
-  /// No description provided for @sentenceRescheduleEndAfterStart.
+  /// No description provided for @rescheduleWithWorker.
   ///
   /// In en, this message translates to:
-  /// **'End time must be after start time'**
-  String get sentenceRescheduleEndAfterStart;
+  /// **'With {worker}'**
+  String rescheduleWithWorker(Object worker);
+
+  /// No description provided for @rescheduleCurrentAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Current appointment: {date}'**
+  String rescheduleCurrentAppointment(Object date);
+
+  /// No description provided for @rescheduleChooseDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a day'**
+  String get rescheduleChooseDay;
+
+  /// No description provided for @rescheduleChooseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Available times'**
+  String get rescheduleChooseTime;
+
+  /// No description provided for @rescheduleNoSlotsDay.
+  ///
+  /// In en, this message translates to:
+  /// **'No free times on this day.'**
+  String get rescheduleNoSlotsDay;
+
+  /// No description provided for @rescheduleNoAvailability.
+  ///
+  /// In en, this message translates to:
+  /// **'Your professional has no available times in the coming days.'**
+  String get rescheduleNoAvailability;
+
+  /// No description provided for @rescheduleNewAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'New appointment'**
+  String get rescheduleNewAppointment;
+
+  /// No description provided for @rescheduleDurationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'The end time is calculated automatically from the service duration ({minutes} min).'**
+  String rescheduleDurationHint(int minutes);
+
+  /// No description provided for @rescheduleOnceWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Important: you can only reschedule this appointment once.'**
+  String get rescheduleOnceWarning;
+
+  /// No description provided for @rescheduleSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your appointment was rescheduled'**
+  String get rescheduleSuccess;
 
   /// No description provided for @noNotificationsYet.
   ///

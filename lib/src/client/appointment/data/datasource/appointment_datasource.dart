@@ -1,3 +1,4 @@
+import 'package:ponte_glam/shared/model/available_date_model.dart';
 import 'package:ponte_glam/src/client/appointment/data/model/appointment_model.dart';
 
 abstract class AppointmentDatasource {
@@ -23,12 +24,15 @@ abstract class AppointmentDatasource {
     String? reason,
   });
 
+  Future<List<AvailableDateModel>> listRescheduleSlots({
+    required String authToken,
+    required int appointmentId,
+  });
+
   Future<void> rescheduleAppointment({
     required String authToken,
     required int appointmentId,
     required String newStartTime,
-    required String newEndTime,
-    int? workerId,
   });
 
   Future<AppointmentModel> confirmCashAppointment({

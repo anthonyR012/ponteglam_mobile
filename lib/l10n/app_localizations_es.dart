@@ -590,8 +590,42 @@ class AppLocalizationsEs extends AppLocalizations {
   String get titleNoAppointmentsInCategory => 'No hay citas en esta categoría';
 
   @override
-  String get sentenceRescheduleEndAfterStart =>
-      'La hora de fin debe ser posterior a la de inicio';
+  String rescheduleWithWorker(Object worker) {
+    return 'Con $worker';
+  }
+
+  @override
+  String rescheduleCurrentAppointment(Object date) {
+    return 'Cita actual: $date';
+  }
+
+  @override
+  String get rescheduleChooseDay => 'Elige el día';
+
+  @override
+  String get rescheduleChooseTime => 'Horarios disponibles';
+
+  @override
+  String get rescheduleNoSlotsDay => 'No hay horarios libres este día.';
+
+  @override
+  String get rescheduleNoAvailability =>
+      'Tu profesional no tiene horarios disponibles en los próximos días.';
+
+  @override
+  String get rescheduleNewAppointment => 'Nueva cita';
+
+  @override
+  String rescheduleDurationHint(int minutes) {
+    return 'La hora de finalización se calcula automáticamente según la duración del servicio ($minutes min).';
+  }
+
+  @override
+  String get rescheduleOnceWarning =>
+      'Importante: solo puedes reagendar esta cita una vez.';
+
+  @override
+  String get rescheduleSuccess => 'Tu cita fue reagendada';
 
   @override
   String get noNotificationsYet => 'No tienes notificaciones aún';

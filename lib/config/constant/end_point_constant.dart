@@ -130,6 +130,8 @@ class EndPoints {
       "$baseUrl/services/api/cancel-appointment/";
   String get rescheduleAppointmentUrl =>
       "$baseUrl/services/api/reschedule-appointment/";
+  String get listRescheduleSlotsUrl =>
+      "$baseUrl/services/api/list-reschedule-slots/";
   String get confirmCashAppointmentUrl =>
       "$baseUrl/services/api/confirm-cash-appointment/";
 

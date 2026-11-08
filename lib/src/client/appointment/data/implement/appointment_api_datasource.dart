@@ -9,6 +9,7 @@ import 'package:ponte_glam/core/errors/failure.dart';
 import 'package:ponte_glam/core/errors/throw_response_client.dart';
 import 'package:ponte_glam/core/errors/throw_response_server.dart';
 import 'package:ponte_glam/device/connectivity/network_state.dart';
+import 'package:ponte_glam/shared/model/available_date_model.dart';
 import 'package:ponte_glam/src/client/appointment/data/datasource/appointment_datasource.dart';
 import 'package:ponte_glam/src/client/appointment/data/model/appointment_model.dart';
 
@@ -168,25 +169,49 @@ class AppointmentApiDatasourceImplement extends AppointmentApiDatasource {
   }
 
   @override
+  Future<List<AvailableDateModel>> listRescheduleSlots({
+    required String authToken,
+    required int appointmentId,
+  }) async {
+    throwIfError(
+        _network.status == ConnectivityResult.none, _failureManage.connectivity);
+
+    final String url = '${_endPoints.listRescheduleSlotsUrl}$appointmentId/';
+    final Response response = await _dio
+        .get(url, options: _authOptions(authToken))
+        .timeout(const Duration(seconds: timeOutApi));
+
+    if (response.data is Map<String, dynamic>) {
+      if (response.data.containsKey(keyErr)) {
+        throwClientResponse(response.statusCode, response.data[keyErr]);
+      } else if (response.data.containsKey(keyDetail) &&
+          response.statusCode != HTTP_200_OK) {
+        throwServerResponse(response.statusCode, response.data[keyDetail]);
+      }
+    }
+
+    throwIfError(response.statusCode != HTTP_200_OK,
+        _failureManage.server("Error fetching reschedule slots"));
+
+    return (response.data[keySuccess] as List<dynamic>)
+        .map((e) => AvailableDateModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
   Future<void> rescheduleAppointment({
     required String authToken,
     required int appointmentId,
     required String newStartTime,
-    required String newEndTime,
-    int? workerId,
   }) async {
     throwIfError(
         _network.status == ConnectivityResult.none, _failureManage.connectivity);
 
     final String url = '${_endPoints.rescheduleAppointmentUrl}$appointmentId/';
-    final Map<String, dynamic> body = {
-      'new_start_time': newStartTime,
-      'new_end_time': newEndTime,
-    };
-    if (workerId != null) body['worker_id'] = workerId;
-
     final Response response = await _dio
-        .patch(url, options: _authOptions(authToken), data: body)
+        .patch(url,
+            options: _authOptions(authToken),
+            data: {'new_start_time': newStartTime})
         .timeout(const Duration(seconds: timeOutApi));
 
     if (response.data is Map<String, dynamic>) {

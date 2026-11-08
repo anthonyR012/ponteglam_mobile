@@ -6,6 +6,7 @@ import 'package:ponte_glam/device/storage/istorage.dart';
 import 'package:ponte_glam/di/get_it_instance.dart';
 import 'package:ponte_glam/src/client/appointment/domain/repository/appointment_repository.dart';
 
+/// Mueve la cita a un slot disponible; la hora fin la calcula el backend.
 class DoRescheduleAppointment {
   final AppointmentRepository repository;
   DoRescheduleAppointment({required this.repository});
@@ -17,8 +18,6 @@ class DoRescheduleAppointment {
       authToken: authToken,
       appointmentId: params.appointmentId,
       newStartTime: params.newStartTime,
-      newEndTime: params.newEndTime,
-      workerId: params.workerId,
     );
   }
 }
@@ -26,16 +25,12 @@ class DoRescheduleAppointment {
 class RescheduleParams extends Equatable {
   final int appointmentId;
   final String newStartTime;
-  final String newEndTime;
-  final int? workerId;
 
   const RescheduleParams({
     required this.appointmentId,
     required this.newStartTime,
-    required this.newEndTime,
-    this.workerId,
   });
 
   @override
-  List<Object?> get props => [appointmentId, newStartTime, newEndTime, workerId];
+  List<Object?> get props => [appointmentId, newStartTime];
 }

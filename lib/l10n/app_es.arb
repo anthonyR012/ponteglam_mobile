@@ -181,7 +181,16 @@
   "titleCompleted": "Completadas",
   "titleCancelled": "Canceladas",
   "titleNoAppointmentsInCategory": "No hay citas en esta categoría",
-  "sentenceRescheduleEndAfterStart": "La hora de fin debe ser posterior a la de inicio",
+  "rescheduleWithWorker": "Con {worker}",
+  "rescheduleCurrentAppointment": "Cita actual: {date}",
+  "rescheduleChooseDay": "Elige el día",
+  "rescheduleChooseTime": "Horarios disponibles",
+  "rescheduleNoSlotsDay": "No hay horarios libres este día.",
+  "rescheduleNoAvailability": "Tu profesional no tiene horarios disponibles en los próximos días.",
+  "rescheduleNewAppointment": "Nueva cita",
+  "rescheduleDurationHint": "La hora de finalización se calcula automáticamente según la duración del servicio ({minutes} min).",
+  "rescheduleOnceWarning": "Importante: solo puedes reagendar esta cita una vez.",
+  "rescheduleSuccess": "Tu cita fue reagendada",
   "@titleWhoIam":{
     "placeholders": {
       "user": {}

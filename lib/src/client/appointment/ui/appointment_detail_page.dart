@@ -466,11 +466,7 @@ class _ActionButtons extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12)),
               ),
               onPressed: appointment.canReschedule
-                  ? () => showRescheduleSheet(
-                        context: context,
-                        appointment: appointment,
-                        cubit: cubit,
-                      )
+                  ? () => _openReschedule(context, appointment)
                   : null,
             ),
           ),
@@ -516,6 +512,19 @@ class _ActionButtons extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  Future<void> _openReschedule(
+      BuildContext context, AppointmentModel appointment) async {
+    final bool rescheduled =
+        await showRescheduleSheet(context: context, appointment: appointment);
+    if (!rescheduled || !context.mounted) return;
+    PonteSnackBar.show(
+      context,
+      message: AppLocalizations.of(context).rescheduleSuccess,
+      type: TypeAlert.success,
+    );
+    cubit.loadAppointmentDetail(appointment.id);
   }
 
   void _showCancelDialog(BuildContext context) {

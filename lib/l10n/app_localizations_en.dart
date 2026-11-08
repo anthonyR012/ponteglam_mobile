@@ -588,8 +588,42 @@ class AppLocalizationsEn extends AppLocalizations {
       'No appointments in this category';
 
   @override
-  String get sentenceRescheduleEndAfterStart =>
-      'End time must be after start time';
+  String rescheduleWithWorker(Object worker) {
+    return 'With $worker';
+  }
+
+  @override
+  String rescheduleCurrentAppointment(Object date) {
+    return 'Current appointment: $date';
+  }
+
+  @override
+  String get rescheduleChooseDay => 'Choose a day';
+
+  @override
+  String get rescheduleChooseTime => 'Available times';
+
+  @override
+  String get rescheduleNoSlotsDay => 'No free times on this day.';
+
+  @override
+  String get rescheduleNoAvailability =>
+      'Your professional has no available times in the coming days.';
+
+  @override
+  String get rescheduleNewAppointment => 'New appointment';
+
+  @override
+  String rescheduleDurationHint(int minutes) {
+    return 'The end time is calculated automatically from the service duration ($minutes min).';
+  }
+
+  @override
+  String get rescheduleOnceWarning =>
+      'Important: you can only reschedule this appointment once.';
+
+  @override
+  String get rescheduleSuccess => 'Your appointment was rescheduled';
 
   @override
   String get noNotificationsYet => 'You don\'t have any notifications yet';
