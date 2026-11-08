@@ -5,7 +5,7 @@ import 'package:ponte_glam/shared/model/country_model.dart';
 import 'package:ponte_glam/shared/model/type_model.dart';
 
 abstract class SettingDatasource {
-  Future<List<CategoryModel>> getCategories();
+  Future<List<CategoryModel>> getCategories({bool includeEmpty = false});
   Future<List<TypeModel>> getTypes();
   Future<List<AmenityModel>> getAmenities();
   Future<List<TypeModel>> getTypesByCategory({required String category});

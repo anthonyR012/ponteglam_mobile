@@ -1,5 +1,5 @@
 class EndPoints {
-  final String baseUrl = "https://89d3-2800-e2-777f-ee0b-39c5-4be8-5d93-727e.ngrok-free.app";
+  final String baseUrl = "https://scarlet-automorphic-scripturally.ngrok-free.dev";
   EndPoints();
 
   // Auth

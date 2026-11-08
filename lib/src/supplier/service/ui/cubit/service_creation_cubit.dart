@@ -63,7 +63,7 @@ class ServiceCreationCubit extends Cubit<ServiceCreationState> {
     emit(ServiceCreationLoading(state.form));
 
     try {
-      final categoriesResult = await doGetCategories();
+      final categoriesResult = await doGetCategories(includeEmpty: true);
       final genderResult = await doGetTypesByCategory(category: 'gender_service');
       final stateResult = await doGetTypesByCategory(category: 'status_service');
       final amenitiesResult = await doGetAmenities();

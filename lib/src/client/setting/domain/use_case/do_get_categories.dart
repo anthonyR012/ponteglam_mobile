@@ -8,7 +8,8 @@ class DoGetCategories {
 
   DoGetCategories(this.settingRepository);
 
-  Future<Either<Failure, List<CategoryModel>>> call() async {
-    return await settingRepository.getCategories();
+  Future<Either<Failure, List<CategoryModel>>> call(
+      {bool includeEmpty = false}) async {
+    return await settingRepository.getCategories(includeEmpty: includeEmpty);
   }
 }

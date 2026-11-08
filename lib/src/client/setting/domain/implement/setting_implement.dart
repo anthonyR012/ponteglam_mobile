@@ -14,10 +14,11 @@ class SettingImplement extends SettingRepository {
   SettingImplement(this.settingApiDatasource);
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getCategories() async {
+  Future<Either<Failure, List<CategoryModel>>> getCategories(
+      {bool includeEmpty = false}) async {
     try {
       List<CategoryModel> categories =
-          await settingApiDatasource.getCategories();
+          await settingApiDatasource.getCategories(includeEmpty: includeEmpty);
       return Right(categories);
     } catch (e, stackTrace) {
       if (e is! Failure) {

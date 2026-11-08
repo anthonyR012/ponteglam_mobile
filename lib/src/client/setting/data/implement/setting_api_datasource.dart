@@ -26,11 +26,14 @@ class SettingApiDatasourceImplement extends SettingDatasource {
   final FailureManage _failureManage;
 
   @override
-  Future<List<CategoryModel>> getCategories() async {
+  Future<List<CategoryModel>> getCategories({bool includeEmpty = false}) async {
     throwIfError(_network.status == ConnectivityResult.none,
         _failureManage.connectivity);
     final Response response = await _dio
-        .get(_endPoints.listCategoriesServicesUrl)
+        .get(
+          _endPoints.listCategoriesServicesUrl,
+          queryParameters: includeEmpty ? {'include_empty': 'true'} : null,
+        )
         .timeout(const Duration(seconds: timeOutApi));
     if (response.data.runtimeType.toString().contains('Map<String, dynamic>')) {
       if (response.data.containsKey(keyErr)) {
