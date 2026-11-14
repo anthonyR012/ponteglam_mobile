@@ -277,12 +277,16 @@ class _SlotGrid extends StatelessWidget {
       return _Message(text: AppLocalizations.of(context).rescheduleNoSlotsDay);
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: slots.map((slot) {
+    return SizedBox(
+      height: 44,
+      child: ListView.separated(
+        key: ValueKey(slots.first.startTime),
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        itemCount: slots.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (context, index) {
+          final AvailableSlotModel slot = slots[index];
           final bool isSelected = slot == selected;
           return ChoiceChip(
             label: Text(_hour(_local(slot.startTime))),
@@ -301,7 +305,7 @@ class _SlotGrid extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
           );
-        }).toList(),
+        },
       ),
     );
   }

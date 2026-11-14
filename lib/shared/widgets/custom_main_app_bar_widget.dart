@@ -45,7 +45,12 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    // Sin menú (p. ej. al abrir desde una notificación) se muestra la flecha si hay a dónde volver.
+    final bool showLeading = widget.iconMenu ||
+        (widget.controllerMenu == null && context.canPop());
+
     return AppBar(
+      automaticallyImplyLeading: false,
       flexibleSpace: SafeArea(
         child: Stack(
           children: [
@@ -53,9 +58,9 @@ class _CustomMainAppBarState extends State<CustomMainAppBar> {
               top: widget.top,
               left: widget.left,
               child: Opacity(
-                opacity: widget.iconMenu ? 1 : 0,
+                opacity: showLeading ? 1 : 0,
                 child: IgnorePointer(
-                  ignoring: !widget.iconMenu,
+                  ignoring: !showLeading,
                   child: InkWell(
                     splashFactory: NoSplash.splashFactory,
                     onTap: () {

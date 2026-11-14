@@ -16,8 +16,6 @@ class BookingCubit extends Cubit<BookingState> {
   final BookingRepository _repository;
 
   int? _serviceId;
-  int? _workerId;
-  int? _headQuarterId;
 
   Future<void> loadDates({
     required int serviceId,
@@ -26,8 +24,6 @@ class BookingCubit extends Cubit<BookingState> {
     int days = 15,
   }) async {
     _serviceId = serviceId;
-    _workerId = workerId;
-    _headQuarterId = headQuarterId;
 
     emit(const BookingLoadingDates());
 
@@ -223,21 +219,7 @@ class BookingCubit extends Cubit<BookingState> {
 
   void reset() {
     _serviceId = null;
-    _workerId = null;
-    _headQuarterId = null;
     emit(const BookingInitial());
-  }
-
-  Future<void> refreshAfterBooking() async {
-    if (_serviceId != null && _workerId != null) {
-      await loadDates(
-        serviceId: _serviceId!,
-        workerId: _workerId,
-        headQuarterId: _headQuarterId,
-      );
-    } else {
-      reset();
-    }
   }
 
   List<AvailableDateModel>? get _currentDates {

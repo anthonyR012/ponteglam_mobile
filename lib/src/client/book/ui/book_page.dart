@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +22,9 @@ import 'package:ponte_glam/src/client/book/ui/widgets/addon_selector_widget.dart
 import 'package:ponte_glam/src/client/book/ui/widgets/booking_summary_widget.dart';
 import 'package:ponte_glam/src/client/book/ui/cubit/booking_cubit.dart';
 import 'package:ponte_glam/src/client/book/ui/cubit/booking_state.dart';
+import 'package:ponte_glam/src/client/appointment/ui/appointment_detail_page.dart';
+import 'package:ponte_glam/src/client/history/ui/history_page.dart';
+import 'package:ponte_glam/src/client/home/ui/home_page.dart';
 import 'package:ponte_glam/src/client/profile/ui/profile_page.dart';
 import 'package:ponte_glam/src/client/profile/ui/widgets/addresses_widgets/adresses_available_widget.dart';
 import 'package:ponte_glam/src/client/profile/ui/widgets/addresses_widgets/create_address_widget.dart';
@@ -133,6 +137,16 @@ class _BookPageState extends State<BookPage> {
     );
   }
 
+  /// Deja la pila Inicio → Mis reservas → detalle de la reserva recién creada.
+  void _openNewAppointment(int appointmentId) {
+    final GoRouter router = GoRouter.of(context);
+    router.go('/${HomePage.routeName}');
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      router.pushNamed(AppointmentHistory.routeName);
+      router.pushNamed(AppointmentDetailPage.routeName, extra: appointmentId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final activeService = widget.service;
@@ -149,8 +163,7 @@ class _BookPageState extends State<BookPage> {
                   '¡Reserva creada! El pago se realizará en efectivo en el local.',
               type: TypeAlert.success,
             );
-            context.pop();
-            _bookingCubit.refreshAfterBooking();
+            _openNewAppointment(state.appointmentId);
           }
           if (state is BookingError && _isBookingInProgress) {
             setState(() => _isBookingInProgress = false);
