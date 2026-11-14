@@ -200,6 +200,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get inputSearchServices => 'Buscar servicios...';
 
   @override
+  String titleSearchResultsFor(Object query) {
+    return 'Resultados para \"$query\"';
+  }
+
+  @override
+  String get titleSearchAllCategories =>
+      'En todas las categorías · Toca una categoría para volver';
+
+  @override
   String get inputGeographicPoint => 'Punto geográfico';
 
   @override

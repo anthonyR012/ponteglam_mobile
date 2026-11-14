@@ -63,6 +63,13 @@
   "inputSearchCountry": "Search Country...",
   "inputSearchCity": "Search City...",
   "inputSearchServices": "Search Services...",
+  "titleSearchResultsFor": "Results for \"{query}\"",
+  "@titleSearchResultsFor": {
+    "placeholders": {
+      "query": {}
+    }
+  },
+  "titleSearchAllCategories": "In all categories · Tap a category to go back",
   "inputGeographicPoint": "Geographic point",
   "questionHaveAccount": "Don''t have an account?",
   "questionForgotPassword": "Forgot your password?",

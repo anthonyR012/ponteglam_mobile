@@ -476,6 +476,18 @@ abstract class AppLocalizations {
   /// **'Search Services...'**
   String get inputSearchServices;
 
+  /// No description provided for @titleSearchResultsFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Results for \"{query}\"'**
+  String titleSearchResultsFor(Object query);
+
+  /// No description provided for @titleSearchAllCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'In all categories · Tap a category to go back'**
+  String get titleSearchAllCategories;
+
   /// No description provided for @inputGeographicPoint.
   ///
   /// In en, this message translates to:

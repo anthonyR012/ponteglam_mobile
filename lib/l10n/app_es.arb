@@ -63,6 +63,13 @@
   "inputSearchCountry": "Buscar país...",
   "inputSearchCity": "Buscar ciudad...",
   "inputSearchServices": "Buscar servicios...",
+  "titleSearchResultsFor": "Resultados para \"{query}\"",
+  "@titleSearchResultsFor": {
+    "placeholders": {
+      "query": {}
+    }
+  },
+  "titleSearchAllCategories": "En todas las categorías · Toca una categoría para volver",
   "inputGeographicPoint": "Punto geográfico",
   "questionHaveAccount": "¿No tienes una cuenta?",
   "questionForgotPassword": "¿Olvidaste tu contraseña?",

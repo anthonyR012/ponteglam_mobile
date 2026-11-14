@@ -112,7 +112,7 @@ class PlaceInfoHeader extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  "${headquarter.rating} (${headquarter.ratingCount} ${getIt<AppLocalizations>().titleReviews})",
+                  "${(service?.rating ?? headquarter.rating).toStringAsFixed(1)} (${service?.ratingCount ?? headquarter.ratingCount} ${getIt<AppLocalizations>().titleReviews})",
                   style: const TextStyle(
                       color: grayTextColorTheme,
                       fontFamily: fontFamilyMontserrat,

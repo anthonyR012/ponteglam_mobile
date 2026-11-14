@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ponte_glam/config/constant/assets_constant.dart';
 import 'package:ponte_glam/config/theme/theme.dart';
@@ -12,10 +11,12 @@ class CategoriesList extends StatefulWidget {
       {super.key,
       required this.height,
       required this.width,
-      required this.onTapCategory});
+      required this.onTapCategory,
+      this.searchQuery = ''});
   final double height;
   final double width;
   final void Function(CategoryModel) onTapCategory;
+  final String searchQuery;
 
   @override
   State<CategoriesList> createState() => _CategoriesListState();
@@ -60,9 +61,12 @@ class _CategoriesListState extends State<CategoriesList> {
 
   Column _buildListCategories(CategoryModel? selectedCategory, bool isLoading,
       List<CategoryModel> categories) {
+    final isSearching = widget.searchQuery.trim().isNotEmpty;
     return Column(
       children: [
-        if (selectedCategory != null)
+        if (isSearching && !isLoading)
+          _getBannerGlobalSearch(widget.searchQuery.trim())
+        else if (selectedCategory != null)
           _getBannerSelectedCategory(selectedCategory, isLoading: isLoading),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -75,8 +79,9 @@ class _CategoriesListState extends State<CategoriesList> {
                   ? List.generate(
                       categories.length,
                       (index) => _getItemCategoryBanner(categories[index],
-                          isSelected: (selectedCategory?.id ?? -1) ==
-                              categories[index].id))
+                          isSelected: !isSearching &&
+                              (selectedCategory?.id ?? -1) ==
+                                  categories[index].id))
                   : List.generate(
                       5,
                       (index) => _getItemCategoryBanner(
@@ -127,6 +132,55 @@ class _CategoriesListState extends State<CategoriesList> {
                     fontSize: h5Size + 2),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getBannerGlobalSearch(String query) {
+    final appLocalizations = getIt<AppLocalizations>();
+    return SizedBox(
+      height: widget.height,
+      child: OverflowBox(
+        maxWidth: widget.width,
+        maxHeight: widget.height,
+        child: Container(
+          margin: const EdgeInsets.only(top: 10),
+          height: 100,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          color: secondaryColorTheme,
+          child: Row(
+            children: [
+              const Icon(Icons.search, color: whiteColorTheme, size: 40),
+              const SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      appLocalizations.titleSearchResultsFor(query),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontFamily: fontFamilyMontserrat,
+                          fontSize: h4Size,
+                          fontWeight: FontWeight.bold,
+                          color: whiteColorTheme),
+                    ),
+                    Text(
+                      appLocalizations.titleSearchAllCategories,
+                      maxLines: 2,
+                      style: const TextStyle(
+                          fontFamily: fontFamilyMontserrat,
+                          fontSize: h5Size,
+                          color: whiteColorTheme),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -186,8 +240,6 @@ class _CategoriesListState extends State<CategoriesList> {
   }
 
   void _getCategories({required BuildContext context}) async {
-    context
-        .read<SettingBloc>()
-        .add(const DoGetCategoriesEvent());
+    context.read<SettingBloc>().add(const DoGetCategoriesEvent());
   }
 }

@@ -95,10 +95,14 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
         SliverToBoxAdapter(
             child: Padding(
           padding: const EdgeInsets.only(top: 3.0),
-          child: CategoriesList(
-            onTapCategory: _onTapCategory,
-            height: height * 0.11,
-            width: width,
+          child: BlocBuilder<ServiceBloc, ServiceState>(
+            buildWhen: (_, state) => state is GetFilterServiceLoaded,
+            builder: (context, _) => CategoriesList(
+              onTapCategory: _onTapCategory,
+              searchQuery: getIt<ServiceBloc>().filterService.query ?? '',
+              height: height * 0.11,
+              width: width,
+            ),
           ),
         )),
         _buildProviderServices(),
@@ -139,9 +143,15 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
               HeadquarterModel? headquarter;
               if (!enableLoading) {
+                // La búsqueda por texto es global: no se filtra por categoría.
+                final isSearching =
+                    (getIt<ServiceBloc>().filterService.query ?? '')
+                        .trim()
+                        .isNotEmpty;
                 final selectedCategoryId = _settingBloc.categorySelected?.id;
                 final originalHeadquarter = headquarters[index];
-                final filteredServices = selectedCategoryId == null
+                final filteredServices = selectedCategoryId == null ||
+                        isSearching
                     ? originalHeadquarter.services
                     : originalHeadquarter.services
                         .where((s) => s.categoryServiceId == selectedCategoryId)
@@ -178,7 +188,7 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   Widget _onScroll(double percentage) {
     InputDecoration? decoration;
-    
+
     // This is the standalone filter icon shown when the search bar is hidden (scrolled down)
     final filterIconStandalone = InkWell(
       splashFactory: InkSplash.splashFactory,
@@ -270,7 +280,8 @@ class _HomeDetailPageState extends State<HomeDetailPage> {
 
   void _onTapCategory(CategoryModel selected) {
     _settingBloc.categorySelected = selected;
-    getIt<ServiceBloc>().setFilter(context: context);
+    _searchController.clear();
+    getIt<ServiceBloc>().setFilter(context: context, query: '');
     setState(() {});
   }
 }
